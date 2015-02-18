@@ -1,0 +1,13 @@
+PODS:
+  - FLAnimatedImage (1.0.8)
+  - PureLayout (2.0.5)
+
+DEPENDENCIES:
+  - FLAnimatedImage (~> 1.0.8)
+  - PureLayout (~> 2.0.5)
+
+SPEC CHECKSUMS:
+  FLAnimatedImage: 8669ace2a531fc0bb7344a6326f48c3a4c3de84b
+  PureLayout: 63a3257320223e8edddcd3afb407445f85a6bf74
+
+COCOAPODS: 0.34.4
