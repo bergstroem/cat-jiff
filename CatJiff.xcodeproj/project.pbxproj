@@ -14,6 +14,8 @@
 		020072821A98BE4E0090DD6C /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 020072801A98BE4E0090DD6C /* Montserrat-Bold.ttf */; };
 		020072831A98BE4E0090DD6C /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 020072811A98BE4E0090DD6C /* Montserrat-Regular.ttf */; };
 		020072861A98BEDF0090DD6C /* UIFont+Montserrat.m in Sources */ = {isa = PBXBuildFile; fileRef = 020072851A98BEDF0090DD6C /* UIFont+Montserrat.m */; };
+		020072921A98C63F0090DD6C /* Gif.m in Sources */ = {isa = PBXBuildFile; fileRef = 020072911A98C63F0090DD6C /* Gif.m */; };
+		020072951A98C8140090DD6C /* CardView+Gif.m in Sources */ = {isa = PBXBuildFile; fileRef = 020072941A98C8140090DD6C /* CardView+Gif.m */; };
 		021535401A954298003B684B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0215353F1A954298003B684B /* main.m */; };
 		021535431A954298003B684B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 021535421A954298003B684B /* AppDelegate.m */; };
 		021535491A954298003B684B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 021535471A954298003B684B /* Main.storyboard */; };
@@ -47,6 +49,10 @@
 		020072811A98BE4E0090DD6C /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Regular.ttf"; path = "Fonts/Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		020072841A98BEDF0090DD6C /* UIFont+Montserrat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIFont+Montserrat.h"; path = "Categories/UIFont+Montserrat.h"; sourceTree = "<group>"; };
 		020072851A98BEDF0090DD6C /* UIFont+Montserrat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIFont+Montserrat.m"; path = "Categories/UIFont+Montserrat.m"; sourceTree = "<group>"; };
+		020072901A98C63F0090DD6C /* Gif.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Gif.h; path = Models/Gif.h; sourceTree = "<group>"; };
+		020072911A98C63F0090DD6C /* Gif.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Gif.m; path = Models/Gif.m; sourceTree = "<group>"; };
+		020072931A98C8140090DD6C /* CardView+Gif.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CardView+Gif.h"; path = "Views/CardView+Gif.h"; sourceTree = "<group>"; };
+		020072941A98C8140090DD6C /* CardView+Gif.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CardView+Gif.m"; path = "Views/CardView+Gif.m"; sourceTree = "<group>"; };
 		0215353A1A954298003B684B /* CatJiff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CatJiff.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0215353E1A954298003B684B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0215353F1A954298003B684B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -186,6 +192,8 @@
 				020072721A9547990090DD6C /* PagedView.m */,
 				020072741A9893950090DD6C /* CardView.h */,
 				020072751A9893950090DD6C /* CardView.m */,
+				020072931A98C8140090DD6C /* CardView+Gif.h */,
+				020072941A98C8140090DD6C /* CardView+Gif.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -193,6 +201,8 @@
 		021535651A9542A6003B684B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				020072901A98C63F0090DD6C /* Gif.h */,
+				020072911A98C63F0090DD6C /* Gif.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -351,8 +361,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				020072921A98C63F0090DD6C /* Gif.m in Sources */,
 				020072761A9893950090DD6C /* CardView.m in Sources */,
 				0200727B1A989A240090DD6C /* UIColor+FlatUIColors.m in Sources */,
+				020072951A98C8140090DD6C /* CardView+Gif.m in Sources */,
 				020072861A98BEDF0090DD6C /* UIFont+Montserrat.m in Sources */,
 				0200727E1A989ADB0090DD6C /* GifFeedViewController.m in Sources */,
 				021535681A9542CD003B684B /* SwipeView.m in Sources */,
