@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "SwipeView.h"
+#import "GifFetcher.h"
 
-@interface GifFeedViewController : UIViewController <SwipeViewDelegate>
+@interface GifFeedViewController : UIViewController <SwipeViewDelegate, GifFetcherDelegate>
 
 @end

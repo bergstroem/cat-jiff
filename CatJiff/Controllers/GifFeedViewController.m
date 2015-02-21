@@ -9,12 +9,14 @@
 #import "GifFeedViewController.h"
 #import "PagedView.h"
 #import "CardView.h"
+#import "CardView+Gif.h"
 
 #import <PureLayout/PureLayout.h>
 
 @interface GifFeedViewController ()
 
 @property (nonatomic, strong) PagedView *pagedView;
+@property (nonatomic, strong) GifFetcher *gifFetcher;
 
 @end
 
@@ -28,16 +30,16 @@
     [self.view addSubview:self.pagedView];
     [self.pagedView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero];
 
-    [self createPage];
-    [self createPage];
-    [self createPage];
-    [self createPage];
-    [self createPage];
+    self.gifFetcher = [[GifFetcher alloc] init];
+    self.gifFetcher.delegate = self;
+
+    [self.gifFetcher fetchCatGifs];
 }
 
-- (void)createPage
+- (void)createSwipePageWithGif:(Gif *)gif image:(FLAnimatedImage *)image
 {
     CardView *cardView = [CardView newAutoLayoutView];
+    [cardView configureViewWithGif:gif image:image];
     SwipeView *swipeView = [SwipeView newAutoLayoutView];
     swipeView.delegate = self;
 
@@ -53,7 +55,7 @@
 
 - (void)swipeViewWasDismissed:(SwipeView *)swipeView
 {
-    [self createPage];
+
 }
 
 - (void)swipeViewDidMove:(SwipeView *)view
@@ -61,6 +63,13 @@
     if (!CGRectIntersectsRect(self.view.bounds, view.contentView.frame)) {
         [self.pagedView removePage:view];
     }
+}
+
+#pragma mark - GifFetcherDelegate
+
+- (void)gifWasDownloaded:(Gif *)gif withImage:(FLAnimatedImage *)image
+{
+    [self createSwipePageWithGif:gif image:(FLAnimatedImage *)image];
 }
 
 @end
