@@ -13,10 +13,15 @@
 
 #import <PureLayout/PureLayout.h>
 
+static NSInteger const kLoadMoreThreshold = 3;
+
 @interface GifFeedViewController ()
 
 @property (nonatomic, strong) PagedView *pagedView;
 @property (nonatomic, strong) GifFetcher *gifFetcher;
+
+@property (nonatomic, assign) NSInteger loadedGifsCount;
+@property (nonatomic, assign) NSInteger dismissedGifsCount;
 
 @end
 
@@ -25,6 +30,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.dismissedGifsCount = 0;
+    self.loadedGifsCount = 0;
+
     self.pagedView = [PagedView newAutoLayoutView];
     self.pagedView.backgroundColor = [UIColor lightGrayColor];
     [self.view addSubview:self.pagedView];
@@ -32,7 +40,6 @@
 
     self.gifFetcher = [[GifFetcher alloc] init];
     self.gifFetcher.delegate = self;
-
     [self.gifFetcher fetchCatGifs];
 }
 
@@ -55,7 +62,11 @@
 
 - (void)swipeViewWasDismissed:(SwipeView *)swipeView
 {
+    self.dismissedGifsCount++;
 
+    if (self.loadedGifsCount < self.dismissedGifsCount + kLoadMoreThreshold) {
+        [self.gifFetcher fetchCatGifs];
+    }
 }
 
 - (void)swipeViewDidMove:(SwipeView *)view
@@ -70,6 +81,7 @@
 - (void)gifWasDownloaded:(Gif *)gif withImage:(FLAnimatedImage *)image
 {
     [self createSwipePageWithGif:gif image:(FLAnimatedImage *)image];
+    self.loadedGifsCount++;
 }
 
 @end
