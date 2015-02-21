@@ -8,6 +8,10 @@
 
 #import "PagedView.h"
 
+static NSInteger const kVisiblePagesCount = 3;
+static CGFloat const kScaleAmount = 20.0f;
+static CGFloat const kTranslationAmount = 15.0f;
+
 @implementation PagedView
 
 - (instancetype)init
@@ -62,16 +66,22 @@
     [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:0.5 initialSpringVelocity:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
         for (int i = 1; i < self.subviews.count + 1; i++) {
             unsigned long backIndex = self.subviews.count - i;
-            UIView *view = self.subviews[i-1];
+            UIView *view = self.subviews[i - 1];
 
-            float scaleFactor = backIndex / (float)10;
+            float scaleFraction = backIndex / kScaleAmount;
 
-            scaleFactor = MIN(1, scaleFactor);
+            scaleFraction = MIN(1, scaleFraction);
 
-            CATransform3D translation = CATransform3DMakeTranslation(0, 30 * backIndex, 0);
-            CATransform3D scale = CATransform3DMakeScale(1 - scaleFactor, 1 - scaleFactor, 1 - scaleFactor);
+            CATransform3D translation = CATransform3DMakeTranslation(0, kTranslationAmount * backIndex, 0);
+            CATransform3D scale = CATransform3DMakeScale(1 - scaleFraction, 1 - scaleFraction, 1 - scaleFraction);
             view.layer.transform = CATransform3DConcat(scale, translation);
-            view.layer.opacity = i / (float)self.subviews.count;
+
+            if (backIndex < kVisiblePagesCount) {
+                NSInteger lower = self.subviews.count - kVisiblePagesCount;
+                view.layer.opacity = (i - lower) / (float)kVisiblePagesCount;
+            } else {
+                view.layer.opacity = 0;
+            }
         }
     } completion:nil];
 }
