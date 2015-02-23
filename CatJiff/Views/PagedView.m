@@ -50,7 +50,18 @@ static CGFloat const kTranslationAmount = 18.0f;
 {
     [self insertSubview:page atIndex:0];
 
-    [self updatePageOverlays];
+    if (self.subviews.count == 1) {
+        page.layer.transform = CATransform3DMakeScale(0.5, 0.5, 0.5);
+        page.layer.opacity = 0;
+        [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:0.8 initialSpringVelocity:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            page.layer.transform = CATransform3DIdentity;
+            page.layer.opacity = 1;
+        } completion:^(BOOL finished) {
+            [self updatePageOverlays];
+        }];
+    } else {
+        [self updatePageOverlays];
+    }
 }
 
 - (void)removePage:(UIView *)page
