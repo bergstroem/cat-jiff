@@ -11,6 +11,9 @@
 #import "CardView.h"
 #import "CardView+Gif.h"
 
+#import "UIColor+FlatUIColors.h"
+#import "UIColor+LightAndDark.h"
+
 #import <PureLayout/PureLayout.h>
 
 static NSInteger const kLoadMoreThreshold = 3;
@@ -19,6 +22,7 @@ static NSInteger const kLoadMoreThreshold = 3;
 
 @property (nonatomic, strong) PagedView *pagedView;
 @property (nonatomic, strong) GifFetcher *gifFetcher;
+@property (nonatomic, strong) NSMutableArray *gifs;
 
 @property (nonatomic, assign) NSInteger loadedGifsCount;
 @property (nonatomic, assign) NSInteger dismissedGifsCount;
@@ -30,6 +34,7 @@ static NSInteger const kLoadMoreThreshold = 3;
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.gifs = [NSMutableArray new];
     self.dismissedGifsCount = 0;
     self.loadedGifsCount = 0;
 
@@ -98,6 +103,7 @@ static NSInteger const kLoadMoreThreshold = 3;
 
 - (void)gifWasDownloaded:(Gif *)gif withImage:(FLAnimatedImage *)image
 {
+    [self.gifs addObject:gif];
     [self createSwipePageWithGif:gif image:(FLAnimatedImage *)image];
     self.loadedGifsCount++;
 }
