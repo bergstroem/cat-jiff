@@ -10,7 +10,7 @@
 #import "NSArray+Reverse.h"
 
 static CGFloat const kScaleAmount = 20.0f;
-static CGFloat const kTranslationAmount = 15.0f;
+static CGFloat const kTranslationAmount = 18.0f;
 
 @implementation PagedView
 
