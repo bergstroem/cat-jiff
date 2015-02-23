@@ -44,7 +44,6 @@ static CGFloat const kShareButtonHeight = 60.0f;
         self.imageViewHeightConstraint = [self.imageView autoMatchDimension:ALDimensionHeight toDimension:ALDimensionWidth ofView:self.imageView withMultiplier:kDefaultAspectRatio];
 
         self.titleLabel = [UILabel newAutoLayoutView];
-        self.titleLabel.text = @"Text";
         self.titleLabel.font = [UIFont montserratBoldWithSize:16];
         [self addSubview:self.titleLabel];
         [self.titleLabel autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:kPadding];
