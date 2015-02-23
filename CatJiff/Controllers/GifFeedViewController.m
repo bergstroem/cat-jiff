@@ -73,10 +73,10 @@ static NSInteger const kMaxVisiblePages = 3;
         UIView *page = pages[i];
         CardView *cardView = page.subviews[0];
         if (i < kMaxVisiblePages) {
-            [UIView animateWithDuration:0.3 animations:^{
+            [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
                 cardView.backgroundColor = [[UIColor clouds] darkenColor:0.06 * i];
                 cardView.alpha = 1;
-            }];
+            } completion:nil];
         } else {
             cardView.alpha = 0;
         }
