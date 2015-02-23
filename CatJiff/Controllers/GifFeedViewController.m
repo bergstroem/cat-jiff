@@ -8,6 +8,7 @@
 
 #import "GifFeedViewController.h"
 #import "Gif.h"
+#import "NoContentView.h"
 #import "PagedView.h"
 #import "CardView.h"
 #import "CardView+Gif.h"
@@ -22,6 +23,7 @@ static NSInteger const kMaxVisiblePages = 3;
 
 @interface GifFeedViewController ()
 
+@property (nonatomic, strong) NoContentView *noContentView;
 @property (nonatomic, strong) PagedView *pagedView;
 @property (nonatomic, strong) GifFetcher *gifFetcher;
 @property (nonatomic, strong) NSMutableArray *gifs;
@@ -36,12 +38,21 @@ static NSInteger const kMaxVisiblePages = 3;
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.view.backgroundColor = [UIColor midnightBlue];
+
     self.gifs = [NSMutableArray new];
     self.dismissedGifsCount = 0;
     self.loadedGifsCount = 0;
 
+    self.noContentView = [NoContentView newAutoLayoutView];
+    self.noContentView.titleLabel.text = @"Loading cats";
+    self.noContentView.descriptionLabel.text = @"Looking for more cats";
+    self.noContentView.loadingMoreContent = YES;
+    [self.view addSubview:self.noContentView];
+    [self.noContentView autoCenterInSuperview];
+    [self.noContentView autoMatchDimension:ALDimensionWidth toDimension:ALDimensionWidth ofView:self.view withOffset:-40];
+
     self.pagedView = [PagedView newAutoLayoutView];
-    self.pagedView.backgroundColor = [UIColor lightGrayColor];
     [self.view addSubview:self.pagedView];
     [self.pagedView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero];
 
