@@ -17,6 +17,7 @@
 		0200728F1A98C5370090DD6C /* GifFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 0200728E1A98C5370090DD6C /* GifFetcher.m */; };
 		020072921A98C63F0090DD6C /* Gif.m in Sources */ = {isa = PBXBuildFile; fileRef = 020072911A98C63F0090DD6C /* Gif.m */; };
 		020072951A98C8140090DD6C /* CardView+Gif.m in Sources */ = {isa = PBXBuildFile; fileRef = 020072941A98C8140090DD6C /* CardView+Gif.m */; };
+		0200729D1A9BD49D0090DD6C /* NSArray+Reverse.m in Sources */ = {isa = PBXBuildFile; fileRef = 0200729C1A9BD49D0090DD6C /* NSArray+Reverse.m */; };
 		021535401A954298003B684B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0215353F1A954298003B684B /* main.m */; };
 		021535431A954298003B684B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 021535421A954298003B684B /* AppDelegate.m */; };
 		021535491A954298003B684B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 021535471A954298003B684B /* Main.storyboard */; };
@@ -56,6 +57,8 @@
 		020072911A98C63F0090DD6C /* Gif.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Gif.m; path = Models/Gif.m; sourceTree = "<group>"; };
 		020072931A98C8140090DD6C /* CardView+Gif.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CardView+Gif.h"; path = "Views/CardView+Gif.h"; sourceTree = "<group>"; };
 		020072941A98C8140090DD6C /* CardView+Gif.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CardView+Gif.m"; path = "Views/CardView+Gif.m"; sourceTree = "<group>"; };
+		0200729B1A9BD49D0090DD6C /* NSArray+Reverse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+Reverse.h"; path = "Categories/NSArray+Reverse.h"; sourceTree = "<group>"; };
+		0200729C1A9BD49D0090DD6C /* NSArray+Reverse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+Reverse.m"; path = "Categories/NSArray+Reverse.m"; sourceTree = "<group>"; };
 		0215353A1A954298003B684B /* CatJiff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CatJiff.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0215353E1A954298003B684B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0215353F1A954298003B684B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -100,6 +103,8 @@
 				0200727A1A989A240090DD6C /* UIColor+FlatUIColors.m */,
 				020072841A98BEDF0090DD6C /* UIFont+Montserrat.h */,
 				020072851A98BEDF0090DD6C /* UIFont+Montserrat.m */,
+				0200729B1A9BD49D0090DD6C /* NSArray+Reverse.h */,
+				0200729C1A9BD49D0090DD6C /* NSArray+Reverse.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -378,6 +383,7 @@
 				020072761A9893950090DD6C /* CardView.m in Sources */,
 				0200727B1A989A240090DD6C /* UIColor+FlatUIColors.m in Sources */,
 				020072951A98C8140090DD6C /* CardView+Gif.m in Sources */,
+				0200729D1A9BD49D0090DD6C /* NSArray+Reverse.m in Sources */,
 				020072861A98BEDF0090DD6C /* UIFont+Montserrat.m in Sources */,
 				0200727E1A989ADB0090DD6C /* GifFeedViewController.m in Sources */,
 				0200728F1A98C5370090DD6C /* GifFetcher.m in Sources */,
