@@ -9,7 +9,9 @@
 #import "ShareButton.h"
 
 #import "UIColor+FlatUIColors.h"
+#import "UIColor+LightAndDark.h"
 #import "UIFont+Montserrat.h"
+#import "UIImage+Color.h"
 
 @implementation ShareButton
 
@@ -20,8 +22,11 @@
         self.clipsToBounds = YES;
         self.backgroundColor = [UIColor alizarin];
         self.titleLabel.font = [UIFont montserratBoldWithSize:16];
+        [self setBackgroundImage:[UIImage imageWithColor:[[UIColor alizarin] darkenColor:0.2]] forState:UIControlStateHighlighted];
     }
     return self;
 }
+
+
 
 @end
