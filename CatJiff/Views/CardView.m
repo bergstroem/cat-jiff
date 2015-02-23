@@ -53,6 +53,7 @@ static CGFloat const kShareButtonHeight = 60.0f;
 
         self.shareButton = [ShareButton newAutoLayoutView];
         [self.shareButton setTitle:@"SHARE" forState:UIControlStateNormal];
+        [self.shareButton addTarget:self action:@selector(shareAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.shareButton];
         [self.shareButton autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(0, 0, 0, 0) excludingEdge:ALEdgeTop];
         [self.shareButton autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.titleLabel withOffset:kPadding];
@@ -92,6 +93,15 @@ static CGFloat const kShareButtonHeight = 60.0f;
     [self.imageView removeConstraint:self.imageViewHeightConstraint];
     self.imageViewHeightConstraint = [self.imageView autoMatchDimension:ALDimensionHeight toDimension:ALDimensionWidth ofView:self.imageView withMultiplier:kDefaultAspectRatio];
     self.shareButtonHeightConstraint.constant = 0;
+}
+
+#pragma mark - Actions
+
+- (void)shareAction:(id)sender
+{
+    if (self.delegate) {
+        [self.delegate cardViewDidSelectShare:self];
+    }
 }
 
 @end

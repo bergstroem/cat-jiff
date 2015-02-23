@@ -7,6 +7,7 @@
 //
 
 #import "GifFeedViewController.h"
+#import "Gif.h"
 #import "PagedView.h"
 #import "CardView.h"
 #import "CardView+Gif.h"
@@ -51,6 +52,7 @@ static NSInteger const kLoadMoreThreshold = 3;
 - (void)createSwipePageWithGif:(Gif *)gif image:(FLAnimatedImage *)image
 {
     CardView *cardView = [CardView newAutoLayoutView];
+    cardView.delegate = self;
     [cardView configureViewWithGif:gif image:image];
     SwipeView *swipeView = [SwipeView newAutoLayoutView];
     swipeView.delegate = self;
@@ -97,6 +99,19 @@ static NSInteger const kLoadMoreThreshold = 3;
         [self.pagedView removePage:view];
         [self tintPages:self.pagedView.pages];
     }
+}
+
+#pragma mark - CardViewDelegate
+
+-(void)cardViewDidSelectShare:(CardView *)cardView
+{
+    Gif *gif = self.gifs[self.dismissedGifsCount];
+
+    UIActivityViewController *activityViewController =
+    [[UIActivityViewController alloc] initWithActivityItems:@[gif.title, gif.url]
+                                      applicationActivities:nil];
+
+    [self presentViewController:activityViewController animated:YES completion:nil];
 }
 
 #pragma mark - GifFetcherDelegate
