@@ -9,6 +9,14 @@
 #import <UIKit/UIKit.h>
 
 @class FLAnimatedImageView;
+@class ShareButton;
+@class CardView;
+
+@protocol CardViewDelegate <NSObject>
+
+- (void)cardViewDidSelectShare:(CardView *)cardView;
+
+@end
 
 @interface CardView : UIView
 
@@ -17,5 +25,7 @@
 @property (nonatomic, strong) ShareButton *shareButton;
 
 @property (nonatomic, assign) BOOL expanded;
+
+@property (nonatomic, weak) id<CardViewDelegate> delegate;
 
 @end
