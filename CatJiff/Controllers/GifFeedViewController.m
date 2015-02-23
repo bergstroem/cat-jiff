@@ -63,6 +63,9 @@ static NSInteger const kMaxVisiblePages = 3;
     [self tintPages:self.pagedView.pages];
 
     [cardView autoMatchDimension:ALDimensionWidth toDimension:ALDimensionWidth ofView:self.view withOffset:-20];
+    [UIView autoSetPriority:UILayoutPriorityRequired forConstraints:^{
+        [cardView autoMatchDimension:ALDimensionHeight toDimension:ALDimensionHeight ofView:self.pagedView withOffset:-40 relation:NSLayoutRelationLessThanOrEqual];
+    }];
     [cardView autoCenterInSuperview];
     [swipeView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero];
 }
