@@ -21,6 +21,7 @@
 		0200729D1A9BD49D0090DD6C /* NSArray+Reverse.m in Sources */ = {isa = PBXBuildFile; fileRef = 0200729C1A9BD49D0090DD6C /* NSArray+Reverse.m */; };
 		020072A01A9BD76B0090DD6C /* ShareButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0200729F1A9BD76B0090DD6C /* ShareButton.m */; };
 		020072A31A9BE1DD0090DD6C /* NoContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 020072A21A9BE1DD0090DD6C /* NoContentView.m */; };
+		020072A61A9BE7F00090DD6C /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 020072A51A9BE7F00090DD6C /* UIImage+Color.m */; };
 		021535401A954298003B684B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0215353F1A954298003B684B /* main.m */; };
 		021535431A954298003B684B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 021535421A954298003B684B /* AppDelegate.m */; };
 		021535491A954298003B684B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 021535471A954298003B684B /* Main.storyboard */; };
@@ -68,6 +69,8 @@
 		0200729F1A9BD76B0090DD6C /* ShareButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShareButton.m; path = Views/ShareButton.m; sourceTree = "<group>"; };
 		020072A11A9BE1DD0090DD6C /* NoContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NoContentView.h; path = Views/NoContentView.h; sourceTree = "<group>"; };
 		020072A21A9BE1DD0090DD6C /* NoContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NoContentView.m; path = Views/NoContentView.m; sourceTree = "<group>"; };
+		020072A41A9BE7F00090DD6C /* UIImage+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Color.h"; path = "Categories/UIImage+Color.h"; sourceTree = "<group>"; };
+		020072A51A9BE7F00090DD6C /* UIImage+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Color.m"; path = "Categories/UIImage+Color.m"; sourceTree = "<group>"; };
 		0215353A1A954298003B684B /* CatJiff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CatJiff.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0215353E1A954298003B684B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0215353F1A954298003B684B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -116,6 +119,8 @@
 				020072991A9BD33B0090DD6C /* UIColor+LightAndDark.m */,
 				0200729B1A9BD49D0090DD6C /* NSArray+Reverse.h */,
 				0200729C1A9BD49D0090DD6C /* NSArray+Reverse.m */,
+				020072A41A9BE7F00090DD6C /* UIImage+Color.h */,
+				020072A51A9BE7F00090DD6C /* UIImage+Color.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -399,6 +404,7 @@
 				0200727B1A989A240090DD6C /* UIColor+FlatUIColors.m in Sources */,
 				020072951A98C8140090DD6C /* CardView+Gif.m in Sources */,
 				0200729D1A9BD49D0090DD6C /* NSArray+Reverse.m in Sources */,
+				020072A61A9BE7F00090DD6C /* UIImage+Color.m in Sources */,
 				020072861A98BEDF0090DD6C /* UIFont+Montserrat.m in Sources */,
 				0200727E1A989ADB0090DD6C /* GifFeedViewController.m in Sources */,
 				0200728F1A98C5370090DD6C /* GifFetcher.m in Sources */,
