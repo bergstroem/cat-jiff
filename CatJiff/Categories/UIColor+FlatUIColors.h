@@ -12,5 +12,6 @@
 
 + (UIColor *)clouds;
 + (UIColor *)alizarin;
++ (UIColor *)midnightBlue;
 
 @end

@@ -20,4 +20,9 @@
     return [UIColor colorWithRed:231/255.0f green:76/255.0f blue:60/255.0f alpha:1.0f];
 }
 
++ (UIColor *)midnightBlue
+{
+    return [UIColor colorWithRed:44/255.0f green:62/255.0f blue:80/255.0f alpha:1.0f];
+}
+
 @end
