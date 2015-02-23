@@ -52,10 +52,27 @@ static NSInteger const kLoadMoreThreshold = 3;
 
     [swipeView setContentView:cardView];
     [self.pagedView addPage:swipeView];
+    [self tintPages:self.pagedView.pages];
 
     [cardView autoMatchDimension:ALDimensionWidth toDimension:ALDimensionWidth ofView:self.view withOffset:-20];
     [cardView autoCenterInSuperview];
     [swipeView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero];
+}
+
+- (void)tintPages:(NSArray *)pages
+{
+    for(int i = 0; i < pages.count; i++) {
+        UIView *page = pages[i];
+        CardView *cardView = page.subviews[0];
+        if (i < 3) {
+            [UIView animateWithDuration:0.3 animations:^{
+                cardView.backgroundColor = [[UIColor clouds] darkenColor:0.06 * i];
+                cardView.alpha = 1;
+            }];
+        } else {
+            cardView.alpha = 0;
+        }
+    }
 }
 
 #pragma mark - SwipeViewDelegate
@@ -73,6 +90,7 @@ static NSInteger const kLoadMoreThreshold = 3;
 {
     if (!CGRectIntersectsRect(self.view.bounds, view.contentView.frame)) {
         [self.pagedView removePage:view];
+        [self tintPages:self.pagedView.pages];
     }
 }
 

@@ -10,6 +10,8 @@
 
 @interface PagedView : UIView
 
+@property (nonatomic, strong) NSArray *pages;
+
 - (void)addPage:(UIView *)page;
 - (void)removePage:(UIView *)page;
 

@@ -7,8 +7,8 @@
 //
 
 #import "PagedView.h"
+#import "NSArray+Reverse.h"
 
-static NSInteger const kVisiblePagesCount = 3;
 static CGFloat const kScaleAmount = 20.0f;
 static CGFloat const kTranslationAmount = 15.0f;
 
@@ -48,7 +48,6 @@ static CGFloat const kTranslationAmount = 15.0f;
 
 - (void)addPage:(UIView *)page
 {
-    page.layer.opacity = 0;
     [self insertSubview:page atIndex:0];
 
     [self updatePageOverlays];
@@ -75,16 +74,15 @@ static CGFloat const kTranslationAmount = 15.0f;
             CATransform3D translation = CATransform3DMakeTranslation(0, kTranslationAmount * backIndex, 0);
             CATransform3D scale = CATransform3DMakeScale(1 - scaleFraction, 1 - scaleFraction, 1 - scaleFraction);
             view.layer.transform = CATransform3DConcat(scale, translation);
-
-            if (backIndex < kVisiblePagesCount) {
-                NSInteger lower = self.subviews.count - kVisiblePagesCount;
-                view.layer.opacity = (i - lower) / (float)kVisiblePagesCount;
-            } else {
-                view.layer.opacity = 0;
-            }
         }
     } completion:nil];
 }
 
+#pragma mark - Accessors
+
+- (NSArray *)pages
+{
+    return [self.subviews reversedArray];
+}
 
 @end
