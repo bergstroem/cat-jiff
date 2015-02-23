@@ -18,6 +18,7 @@
 #import <PureLayout/PureLayout.h>
 
 static NSInteger const kLoadMoreThreshold = 3;
+static NSInteger const kMaxVisiblePages = 3;
 
 @interface GifFeedViewController ()
 
@@ -71,7 +72,7 @@ static NSInteger const kLoadMoreThreshold = 3;
     for(int i = 0; i < pages.count; i++) {
         UIView *page = pages[i];
         CardView *cardView = page.subviews[0];
-        if (i < 3) {
+        if (i < kMaxVisiblePages) {
             [UIView animateWithDuration:0.3 animations:^{
                 cardView.backgroundColor = [[UIColor clouds] darkenColor:0.06 * i];
                 cardView.alpha = 1;
