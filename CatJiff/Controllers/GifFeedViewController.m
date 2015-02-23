@@ -61,6 +61,11 @@ static NSInteger const kMaxVisiblePages = 3;
     [self.gifFetcher fetchCatGifs];
 }
 
+-(UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
 - (void)createSwipePageWithGif:(Gif *)gif image:(FLAnimatedImage *)image
 {
     CardView *cardView = [CardView newAutoLayoutView];
