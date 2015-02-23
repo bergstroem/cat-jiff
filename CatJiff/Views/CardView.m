@@ -7,6 +7,7 @@
 //
 
 #import "CardView.h"
+#import "ShareButton.h"
 
 #import "UIColor+FlatUIColors.h"
 #import "UIFont+Montserrat.h"
@@ -50,10 +51,7 @@ static CGFloat const kShareButtonHeight = 60.0f;
         [self.titleLabel autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:kPadding];
         [self.titleLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.imageView withOffset:kPadding];
 
-        self.shareButton = [UIButton newAutoLayoutView];
-        self.shareButton.clipsToBounds = YES;
-        self.shareButton.backgroundColor = [UIColor alizarin];
-        self.shareButton.titleLabel.font = [UIFont montserratBoldWithSize:16];
+        self.shareButton = [ShareButton newAutoLayoutView];
         [self.shareButton setTitle:@"SHARE" forState:UIControlStateNormal];
         [self addSubview:self.shareButton];
         [self.shareButton autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(0, 0, 0, 0) excludingEdge:ALEdgeTop];

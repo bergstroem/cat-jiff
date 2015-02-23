@@ -14,7 +14,7 @@
 
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) FLAnimatedImageView *imageView;
-@property (nonatomic, strong) UIButton *shareButton;
+@property (nonatomic, strong) ShareButton *shareButton;
 
 @property (nonatomic, assign) BOOL expanded;
 
