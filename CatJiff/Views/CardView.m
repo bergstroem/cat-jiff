@@ -51,6 +51,7 @@ static CGFloat const kShareButtonHeight = 60.0f;
         [self.titleLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.imageView withOffset:kPadding];
 
         self.shareButton = [ShareButton newAutoLayoutView];
+        self.shareButton.hidden = YES;
         [self.shareButton setTitle:@"SHARE" forState:UIControlStateNormal];
         [self.shareButton addTarget:self action:@selector(shareAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.shareButton];
@@ -69,8 +70,10 @@ static CGFloat const kShareButtonHeight = 60.0f;
     self.expanded = !self.expanded;
 
     if (self.expanded) {
+        self.shareButton.hidden = NO;
         [self setupExpandedConstraints];
     } else {
+        self.shareButton.hidden = YES;
         [self setupContractedConstraints];
     }
 
