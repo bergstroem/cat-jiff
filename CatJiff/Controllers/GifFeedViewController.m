@@ -84,16 +84,16 @@ static NSInteger const kMaxVisiblePages = 4;
 
 - (void)showFetchFailed
 {
-    self.noContentView.titleLabel.text = @"Failed";
-    self.noContentView.descriptionLabel.text = @"Sorry, couldn't load more cats.";
+    self.noContentView.titleLabel.text = @"Dangit :(";
+    self.noContentView.descriptionLabel.text = @"Failed to load more cat gifs";
     self.noContentView.loadingMoreContent = NO;
     [self showNoContentView];
 }
 
 - (void)showFetching
 {
-    self.noContentView.titleLabel.text = @"Loading cats";
-    self.noContentView.descriptionLabel.text = @"Looking for more cats.";
+    self.noContentView.titleLabel.text = @"Loading";
+    self.noContentView.descriptionLabel.text = @"Scanning the internet for cat gifs";
     self.noContentView.loadingMoreContent = YES;
     [self showNoContentView];
 }
