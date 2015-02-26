@@ -19,7 +19,7 @@ static CGFloat const kLoadingSpinnerSize = 48.0f;
     self = [super init];
     if (self) {
         self.titleLabel = [UILabel newAutoLayoutView];
-        self.titleLabel.font = [UIFont montserratBoldWithSize:18];
+        self.titleLabel.font = [UIFont montserratBoldWithSize:20];
         self.titleLabel.textColor = [UIColor whiteColor];
         self.titleLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:self.titleLabel];
@@ -32,7 +32,7 @@ static CGFloat const kLoadingSpinnerSize = 48.0f;
         [self addSubview:self.descriptionLabel];
         [self.descriptionLabel autoPinEdgeToSuperviewEdge:ALEdgeLeft];
         [self.descriptionLabel autoPinEdgeToSuperviewEdge:ALEdgeRight];
-        [self.descriptionLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.titleLabel];
+        [self.descriptionLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.titleLabel withOffset:4];
 
         self.loadingSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
         self.loadingSpinner.translatesAutoresizingMaskIntoConstraints = NO;
@@ -40,7 +40,14 @@ static CGFloat const kLoadingSpinnerSize = 48.0f;
         [self.loadingSpinner autoSetDimensionsToSize:CGSizeMake(kLoadingSpinnerSize, kLoadingSpinnerSize)];
         [self.loadingSpinner autoAlignAxisToSuperviewAxis:ALAxisVertical];
         [self.loadingSpinner autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.descriptionLabel];
-        [self.loadingSpinner autoPinEdgeToSuperviewEdge:ALEdgeBottom];
+
+        self.retryButton = [UIButton newAutoLayoutView];
+        self.retryButton.titleLabel.font = [UIFont montserratBoldWithSize:16];
+        [self.retryButton setTitle:@"Try again" forState:UIControlStateNormal];
+        [self.retryButton addTarget:self action:@selector(retryAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:self.retryButton];
+        [self.retryButton autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero excludingEdge:ALEdgeTop];
+        [self.retryButton autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.descriptionLabel];
     }
     return self;
 }
@@ -49,10 +56,19 @@ static CGFloat const kLoadingSpinnerSize = 48.0f;
 {
     if (loadingMoreContent) {
         [self.loadingSpinner startAnimating];
+        self.retryButton.hidden = YES;
     } else {
         [self.loadingSpinner stopAnimating];
+        self.retryButton.hidden = NO;
     }
     _loadingMoreContent = loadingMoreContent;
+}
+
+- (void)retryAction:(id)sender
+{
+    if (self.delegate) {
+        [self.delegate noContentViewDidSelectRetry:self];
+    }
 }
 
 @end
