@@ -8,9 +8,7 @@
 
 #import "GifFeedViewController.h"
 #import "Gif.h"
-#import "NoContentView.h"
 #import "PagedView.h"
-#import "CardView.h"
 #import "CardView+Gif.h"
 
 #import "UIColor+FlatUIColors.h"
@@ -44,21 +42,60 @@ static NSInteger const kMaxVisiblePages = 4;
     self.dismissedGifsCount = 0;
     self.loadedGifsCount = 0;
 
-    self.noContentView = [NoContentView newAutoLayoutView];
-    self.noContentView.titleLabel.text = @"Loading cats";
-    self.noContentView.descriptionLabel.text = @"Looking for more cats";
-    self.noContentView.loadingMoreContent = YES;
-    [self.view addSubview:self.noContentView];
-    [self.noContentView autoCenterInSuperview];
-    [self.noContentView autoMatchDimension:ALDimensionWidth toDimension:ALDimensionWidth ofView:self.view withOffset:-40];
-
     self.pagedView = [PagedView newAutoLayoutView];
     [self.view addSubview:self.pagedView];
     [self.pagedView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero];
 
+    self.noContentView = [NoContentView newAutoLayoutView];
+    self.noContentView.delegate = self;
+    [self showFetching];
+
     self.gifFetcher = [[GifFetcher alloc] init];
     self.gifFetcher.delegate = self;
-    [self.gifFetcher fetchCatGifs];
+
+    __weak typeof(self)welf = self;
+    [self.gifFetcher fetchCatGifsWithError:^(NSError *error) {
+        if (error) {
+            [welf showFetchFailed];
+        }
+    }];
+}
+
+- (void)showNoContentView
+{
+    if (!self.noContentView.superview) {
+        [self.view addSubview:self.noContentView];
+        [self.noContentView autoCenterInSuperview];
+        [self.noContentView autoMatchDimension:ALDimensionWidth toDimension:ALDimensionWidth ofView:self.view withOffset:-40];
+
+        self.noContentView.alpha = 0;
+        self.noContentView.layer.transform = CATransform3DMakeScale(0.5, 0.5, 0.5);
+        [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:0.8 initialSpringVelocity:0.8 options:UIViewAnimationOptionCurveLinear animations:^{
+            self.noContentView.alpha = 1;
+            self.noContentView.layer.transform = CATransform3DIdentity;
+        } completion:nil];
+    }
+}
+
+- (void)hideNoContentView
+{
+    [self.noContentView removeFromSuperview];
+}
+
+- (void)showFetchFailed
+{
+    self.noContentView.titleLabel.text = @"Failed";
+    self.noContentView.descriptionLabel.text = @"Sorry, couldn't load more cats.";
+    self.noContentView.loadingMoreContent = NO;
+    [self showNoContentView];
+}
+
+- (void)showFetching
+{
+    self.noContentView.titleLabel.text = @"Loading cats";
+    self.noContentView.descriptionLabel.text = @"Looking for more cats.";
+    self.noContentView.loadingMoreContent = YES;
+    [self showNoContentView];
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle
@@ -108,8 +145,17 @@ static NSInteger const kMaxVisiblePages = 4;
 {
     self.dismissedGifsCount++;
 
+    if (self.dismissedGifsCount >= self.loadedGifsCount) {
+        [self showFetching];
+    }
+
+    __weak typeof(self)welf = self;
     if (self.loadedGifsCount < self.dismissedGifsCount + kLoadMoreThreshold) {
-        [self.gifFetcher fetchCatGifs];
+        [self.gifFetcher fetchCatGifsWithError:^(NSError *error) {
+            if (error) {
+                [welf showFetchFailed];
+            }
+        }];
     }
 }
 
@@ -134,10 +180,24 @@ static NSInteger const kMaxVisiblePages = 4;
     [self presentViewController:activityViewController animated:YES completion:nil];
 }
 
+#pragma mark - NoContentViewDelegate
+
+-(void)noContentViewDidSelectRetry:(NoContentView *)noContentView
+{
+    __weak typeof(self)welf = self;
+    [self showFetching];
+    [self.gifFetcher fetchCatGifsWithError:^(NSError *error) {
+        if (error) {
+            [welf showFetchFailed];
+        }
+    }];
+}
+
 #pragma mark - GifFetcherDelegate
 
 - (void)gifWasDownloaded:(Gif *)gif withImage:(FLAnimatedImage *)image
 {
+    [self hideNoContentView];
     [self.gifs addObject:gif];
     [self createSwipePageWithGif:gif image:(FLAnimatedImage *)image];
     self.loadedGifsCount++;

@@ -33,7 +33,7 @@ static NSString * const kBaseUrl = @"http://www.reddit.com/r/catgifs.json";
     return self;
 }
 
-- (void)fetchCatGifs
+- (void)fetchCatGifsWithError:(void (^)(NSError *error))errorHandler
 {
     NSString *catUrl = [kBaseUrl stringByAppendingString:[NSString stringWithFormat:@"?limit=%li", kItemsPerPage]];
 
@@ -47,35 +47,38 @@ static NSString * const kBaseUrl = @"http://www.reddit.com/r/catgifs.json";
             completionHandler:^(NSData *data,
                                 NSURLResponse *response,
                                 NSError *error) {
-
+                if (error && errorHandler) {
+                    errorHandler(error);
+                } else {
                     NSDictionary* parsedResponse = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+                    parsedResponse = parsedResponse[@"data"];
+                    NSArray* catsResponse = parsedResponse[@"children"];
+                    NSMutableArray* cats = [NSMutableArray arrayWithCapacity:catsResponse.count];
+                    for(NSDictionary* catJson in catsResponse) {
+                        NSDictionary* catJsonData = catJson[@"data"];
+                        NSString* url = catJsonData[@"url"];
+                        if([url rangeOfString:@".gif"].location == url.length - 4) {
+                            Gif* catGif = [Gif fromJson:catJsonData];
+                            [cats addObject:catGif];
 
-                        parsedResponse = parsedResponse[@"data"];
-                        NSArray* catsResponse = parsedResponse[@"children"];
-                        NSMutableArray* cats = [NSMutableArray arrayWithCapacity:catsResponse.count];
-                        for(NSDictionary* catJson in catsResponse) {
-                            NSDictionary* catJsonData = catJson[@"data"];
-                            NSString* url = catJsonData[@"url"];
-                            if([url rangeOfString:@".gif"].location == url.length - 4) {
-                                Gif* catGif = [Gif fromJson:catJsonData];
-                                [cats addObject:catGif];
+                            [welf.gifQueue addOperationWithBlock:^{
+                                FLAnimatedImage *image = [FLAnimatedImage animatedImageWithGIFData:[NSData dataWithContentsOfURL:[NSURL URLWithString:catGif.url]]];
+                                if (image) {
+                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                        if (welf.delegate) {
+                                            [welf.delegate gifWasDownloaded:catGif withImage:image];
+                                        }
+                                    });
+                                }
 
-                                [welf.gifQueue addOperationWithBlock:^{
-                                    FLAnimatedImage *image = [FLAnimatedImage animatedImageWithGIFData:[NSData dataWithContentsOfURL:[NSURL URLWithString:catGif.url]]];
-                                    if (image) {
-                                        dispatch_async(dispatch_get_main_queue(), ^{
-                                            if (welf.delegate) {
-                                                [welf.delegate gifWasDownloaded:catGif withImage:image];
-                                            }
-                                        });
-                                    }
-
-                                }];
-                            }
+                            }];
                         }
+                    }
 
-                        Gif *lastCat = cats.lastObject;
-                        welf.afterId = [NSString stringWithFormat:@"t3_%@", lastCat.identifier];
+                    Gif *lastCat = cats.lastObject;
+                    welf.afterId = [NSString stringWithFormat:@"t3_%@", lastCat.identifier];
+                }
+
             }] resume];
 }
 

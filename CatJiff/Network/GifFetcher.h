@@ -19,7 +19,7 @@
 
 @interface GifFetcher : NSObject
 
-- (void)fetchCatGifs;
+- (void)fetchCatGifsWithError:(void (^)(NSError *error))errorHandler;
 
 @property (nonatomic, weak) id<GifFetcherDelegate> delegate;
 

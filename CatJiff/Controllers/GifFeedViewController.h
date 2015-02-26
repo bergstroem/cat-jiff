@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "SwipeView.h"
 #import "CardView.h"
+#import "NoContentView.h"
 #import "GifFetcher.h"
 
-@interface GifFeedViewController : UIViewController <SwipeViewDelegate, GifFetcherDelegate, CardViewDelegate>
+@interface GifFeedViewController : UIViewController <SwipeViewDelegate, GifFetcherDelegate, CardViewDelegate, NoContentViewDelegate>
 
 @end
